@@ -67,12 +67,12 @@ class DataFrameWriter:
                            quoting=csv.QUOTE_NONE,
                            escapechar='\\',
                            na_rep='#NULL')
-            f.seek(0)
+            f.close()
 
             if options.verbose:
                 util.log('Writing CSV to: {0}'.format(path))
 
-            self.hdfs.put(path, f)
+            self.hdfs.put(path, tmp_path)
         finally:
             f.close()
             try:
